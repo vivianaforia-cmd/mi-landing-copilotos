@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistentes Corporativos y Copilotos</title>
+    <!-- Importamos TailwindCSS para un diseño corporativo y limpio -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-blue-900 text-white py-20 px-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Copilotos y Asistentes Corporativos</h1>
+        <p class="text-xl max-w-2xl mx-auto">Revolucionando la eficiencia operativa mediante orquestación multi-agente e inteligencia artificial escalable.</p>
+    </header>
+
+    <!-- Secciones Principales -->
+    <main class="max-w-6xl mx-auto py-12 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Diseño -->
+        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
+            <h2 class="text-2xl font-bold mb-3 text-blue-900">1. Diseño</h2>
+            <p class="mb-4">Conceptualización bajo metodologías Lean UX. Diseñamos asistentes que entienden el contexto del negocio mediante <em>system prompts</em> maestros y flujos conversacionales enfocados en el usuario final.</p>
+            <ul class="list-disc pl-5 text-gray-600">
+                <li>Personalidad del bot</li>
+                <li>UX/UI Conversacional</li>
+                <li>Mapeo del Customer Journey</li>
+            </ul>
+        </div>
+
+        <!-- Integración -->
+        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
+            <h2 class="text-2xl font-bold mb-3 text-blue-900">2. Integración</h2>
+            <p class="mb-4">Conectamos el copiloto con tus sistemas operativos (ERPs, WhatsApp, Bases de Datos) utilizando APIs de latencia ultrabaja. Orquestación de agentes para resolver problemas reales.</p>
+            <ul class="list-disc pl-5 text-gray-600">
+                <li>Despliegue en la nube</li>
+                <li>Conexión con bases de datos</li>
+                <li>Seguridad corporativa</li>
+            </ul>
+        </div>
+
+        <!-- Medición -->
+        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500">
+            <h2 class="text-2xl font-bold mb-3 text-blue-900">3. Medición</h2>
+            <p class="mb-4">Lo que no se mide, no se mejora. Paneles gerenciales para auditar el desempeño de los asistentes y visualizar el ROI tecnológico en tiempo real.</p>
+            <ul class="list-disc pl-5 text-gray-600">
+                <li>Tasa de resolución</li>
+                <li>Velocidad de procesamiento</li>
+                <li>Dashboards gerenciales</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Chatbot Widget en la parte inferior derecha -->
+    <div id="chatbot-container" class="fixed bottom-5 right-5 w-80 bg-white shadow-2xl rounded-lg border border-gray-200 hidden flex-col overflow-hidden">
+        <div class="bg-blue-900 text-white p-3 font-bold flex justify-between items-center">
+            <span>Asistente Corporativo</span>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-300">X</button>
+        </div>
+        <div id="chat-messages" class="h-64 p-3 overflow-y-auto text-sm flex flex-col gap-2 bg-gray-50">
+            <div class="bg-blue-100 text-blue-900 p-2 rounded-lg self-start max-w-[85%]">
+                Hola, soy el asistente experto. Conozco todo sobre Diseño, Integración y Medición de copilotos. ¿En qué te puedo ayudar?
+            </div>
+        </div>
+        <div class="p-2 border-t border-gray-200 flex">
+            <input type="text" id="chat-input" class="flex-1 p-2 border rounded-l-md focus:outline-none text-sm" placeholder="Escribe tu duda...">
+            <button onclick="sendMessage()" class="bg-blue-900 text-white px-3 py-2 rounded-r-md text-sm">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Botón flotante para abrir el chat -->
+    <button onclick="toggleChat()" id="chat-trigger" class="fixed bottom-5 right-5 bg-blue-900 text-white p-4 rounded-full shadow-xl hover:bg-blue-800 transition">
+        💬 Consultar
+    </button>
+
+    <script>
+        // Lógica sencilla del Chatbot
+        function toggleChat() {
+            const chat = document.getElementById('chatbot-container');
+            const btn = document.getElementById('chat-trigger');
+            if(chat.classList.contains('hidden')) {
+                chat.classList.remove('hidden');
+                chat.classList.add('flex');
+                btn.classList.add('hidden');
+            } else {
+                chat.classList.add('hidden');
+                chat.classList.remove('flex');
+                btn.classList.remove('hidden');
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if(!message) return;
+
+            const chatMessages = document.getElementById('chat-messages');
+            
+            // Mostrar mensaje del usuario
+            chatMessages.innerHTML += `<div class="bg-gray-200 text-gray-800 p-2 rounded-lg self-end max-w-[85%]">${message}</div>`;
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulación de respuesta de IA (Aquí iría la integración real con API de Groq/OpenRouter)
+            setTimeout(() => {
+                const botReply = `Has preguntado sobre: "${message}". Como esto es una versión de prueba, te confirmo que nuestra plataforma integra Diseño UX, arquitecturas escalables y métricas de ROI.`;
+                chatMessages.innerHTML += `<div class="bg-blue-100 text-blue-900 p-2 rounded-lg self-start max-w-[85%]">${botReply}</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Permitir usar "Enter" para enviar
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
